@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <audio id="backgroundMusic" loop>
+        <source src="./audio/Vibe Mountain   Operatic 3 ♫ NO COPYRIGHT 8 bit Musi.mp3" type="audio/mp3">
+        Seu navegador não suporta o elemento de áudio.
+    </audio>
+    <audio id="jumpSound">
+        <source src="./audio/cartoon-jump-6462.mp3" type="audio/mp3">
+        Seu navegador não suporta o elemento de áudio.
+    </audio>
+    <audio id="crashSound">
+        <source src="./audio/funny-spring-jump-140378.mp3" type="audio/mp3">
+        Seu navegador não suporta o elemento de áudio.
+    </audio>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Dino Run!</title>
+        <meta name="description" content="Jogo desenvolvido em javascript">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="./css/style.css">
+        <link rel="icon" type="image/x-icon" href="/imgs/favicon.ico">
+    </head>
+    <body>
+        <div id ="game-board" class="game-board">
+            <div class="score">
+                <h1>PONTUAÇÃO</h1><h1 id = "pontuacaoFinal"></h1>
+            </div>
+            <img class="clouds" src="./imgs/dinoclouds.png" alt="">
+            <div class="gameOverPopup" id="gameOverPopup" style="display: none;">
+                <h1>Game Over</h1>
+                <button onclick="reiniciarJogo()">Tentar de novo</button>
+            </div>
+            <img class="cactus"src="./imgs/cactus1.png" alt="">
+            <img class="dino" class="jump" src="./imgs/dinorun.gif" alt="">
+        </div>
+        <script src="./js/script.js" async defer></script>
+    </body>
+</html>
