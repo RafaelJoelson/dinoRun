@@ -1,5 +1,6 @@
 const dino = document.querySelector('.dino');
 const cactus = document.querySelector('.cactus');
+const ptero = document.querySelector('.ptero');
 const gameBoard = document.querySelector('.game-board');
 const backgroundMusic = document.getElementById("backgroundMusic");
 const jumpSound = document.getElementById("jumpSound");
@@ -37,38 +38,42 @@ const gameOver = () => {
     document.getElementById("pontuacaoFinal").textContent = points;
     gameIsOver = true; // Define o status do jogo como "Game Over"
 }
-const aplicarTransicao = (animationDuration, backgroundGradient) => {
+const aplicarTransicao = (animationDurationpt,animationDuration, backgroundGradient) => {
     cactus.style.animationDuration = animationDuration;
+    ptero.style.animationDuration = animationDurationpt;
     gameBoard.style.background = backgroundGradient;
 };
 const loop = setInterval(() => {
     
     if (dificuldade > 1000 && dificuldade <= 2000) {
-        aplicarTransicao('2s', 'linear-gradient(rgb(0, 102, 255), rgb(255, 255, 255)');
+        aplicarTransicao('3s','5s', 'linear-gradient(rgb(0, 102, 255), rgb(255, 255, 255)');
         cactus.src = "./imgs/cactus3.png";
     } else if (dificuldade > 2000 && dificuldade <= 3000) {
-        aplicarTransicao('2s', 'linear-gradient(rgb(0, 17, 255), rgb(255, 255, 255))');
+        aplicarTransicao('3s','4s', 'linear-gradient(rgb(0, 17, 255), rgb(255, 255, 255))');
         cactus.src = "./imgs/cactus2.png";
     } else if (dificuldade > 3000 && dificuldade <= 4000) {
-        aplicarTransicao('1s', 'linear-gradient(rgb(80, 0, 178), rgb(38, 32, 25))');
-        cactus.src = "./imgs/cactus3.png";
+        aplicarTransicao('2s','4s', 'linear-gradient(rgb(80, 0, 178), rgb(38, 32, 25))');
+        cactus.src = "./imgs/cactus1.png";
     } else if (dificuldade > 4000 && dificuldade <= 5000) {
-        aplicarTransicao('1s', 'linear-gradient(rgb(0, 17, 255), rgb(255, 255, 255))');
+        aplicarTransicao('3s','5s', 'linear-gradient(rgb(0, 17, 255), rgb(255, 255, 255))');
         cactus.src = "./imgs/cactus2.png";
     }else if (dificuldade > 5000) {
-        aplicarTransicao('1s', 'linear-gradient(rgb(0, 102, 255), rgb(255, 255, 255)');
+        aplicarTransicao('2s','4s', 'linear-gradient(rgb(0, 102, 255), rgb(255, 255, 255)');
         cactus.src = "./imgs/cactus3.png";
         dificuldade *=0; 
     }
 
     if (!gameIsOver) {
         const cactusPosition = cactus.offsetLeft;
+        const pteroPosition = ptero.offsetLeft;
         const dinoPosition = window.getComputedStyle(dino).bottom.replace('px', '');
-        if (dinoPosition < 60 && cactusPosition <= 128 && cactusPosition > -3) {
+        if (dinoPosition < 60 && cactusPosition <= 128 && cactusPosition > -3 || dinoPosition < 60 && pteroPosition <= 128 && pteroPosition > -3) {
             crashSound.currentTime = 0; // Reinicia o som para evitar sobreposição
             crashSound.play();
             cactus.style.animation = 'nome';
             cactus.style.left = `${cactusPosition}px`;
+            ptero.style.animation = 'nome';
+            ptero.style.left = `${pteroPosition}px`;
             dino.style.animation = 'nome';
             dino.style.bottom = `${dinoPosition}px`;
             setTimeout(()=>{

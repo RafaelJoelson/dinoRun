@@ -17,6 +17,7 @@
 }
 .score{
 
+    padding: 25px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     text-align: center;
     color: aliceblue;
@@ -46,7 +47,7 @@
     width: 100px;
     bottom: 0px;
     position: absolute;
-    animation: cactus-animation 2s infinite linear;
+    animation: cactus-animation 6s infinite linear;
 
 }
 
@@ -58,10 +59,17 @@
     bottom: 10px;
     animation: clouds-animation 15s infinite linear;
 }
+.ptero {
+
+    position: absolute;
+    z-index: 3;
+    width: 148px;
+    bottom: 5px;
+    animation: ptero-animation 3s infinite linear;
+}
 
 #gameOverPopup {
-    position: absolute;
-    margin: 50px 40%;
+    margin: 100px;
     text-align: center;
     z-index: 1;
 }
@@ -93,6 +101,14 @@
 }
 
 @keyframes clouds-animation {
+    from {
+        right: -100%;
+    }
+    to{
+        right: 100%;
+    } 
+}
+@keyframes ptero-animation {
     from {
         right: -100%;
     }
