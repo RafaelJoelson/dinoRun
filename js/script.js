@@ -1,25 +1,32 @@
 const dino = document.querySelector('.dino');
 const cactus = document.querySelector('.cactus');
 const ptero = document.querySelector('.ptero');
+const vulcan = document.querySelector('.vulcan');
+const ground = document.querySelector('.ground');
+const background = document.querySelector('.mountains-ini');
 const gameBoard = document.querySelector('.game-board');
 const backgroundMusic = document.getElementById("backgroundMusic");
 const jumpSound = document.getElementById("jumpSound");
 const crashSound = document.getElementById("crashSound");
+
 var points = 0;
 var dificuldade = 0;
 document.getElementById("pontuacaoFinal").innerHTML = points;
 
 let gameIsOver = false; // Variável para rastrear se o jogo acabou
 
+// Função para o pulo do dinossauro
 const jump = () => {
     if (!gameIsOver) {
         // Reproduz o som de salto
         jumpSound.currentTime = 0; // Reinicia o som para evitar sobreposição
         jumpSound.play();
 
+        // Adiciona a classe de pulo e altera a imagem do dinossauro
         dino.classList.add('jump');
         dino.src = "./imgs/dinojump.gif";
 
+        // Remove a classe de pulo e restaura a imagem após um intervalo de tempo
         setTimeout(() => {
             dino.classList.remove('jump');
             dino.src = "./imgs/dinorun.gif";
@@ -27,76 +34,77 @@ const jump = () => {
     }
 }
 
+// Função para reiniciar o jogo (recarrega a página)
 const reiniciarJogo = () => {
-    // Recarrega a página
     location.reload();
 }
 
+// Função chamada quando o jogo termina
 const gameOver = () => {
-    // Mostrar pop-up de "Game Over"
-    document.getElementById("gameOverPopup").style.display = "block";
-    document.getElementById("pontuacaoFinal").textContent = points;
-    gameIsOver = true; // Define o status do jogo como "Game Over"
-}
-const aplicarTransicao = (animationDurationpt,animationDuration, backgroundGradient) => {
-    cactus.style.animationDuration = animationDuration;
-    ptero.style.animationDuration = animationDurationpt;
-    gameBoard.style.background = backgroundGradient;
-};
-const loop = setInterval(() => {
-    
-    if (dificuldade > 1000 && dificuldade <= 2000) {
-        aplicarTransicao('3s','5s', 'linear-gradient(rgb(0, 102, 255), rgb(255, 255, 255)');
-        cactus.src = "./imgs/cactus3.png";
-    } else if (dificuldade > 2000 && dificuldade <= 3000) {
-        aplicarTransicao('3s','4s', 'linear-gradient(rgb(0, 17, 255), rgb(255, 255, 255))');
-        cactus.src = "./imgs/cactus2.png";
-    } else if (dificuldade > 3000 && dificuldade <= 4000) {
-        aplicarTransicao('2s','4s', 'linear-gradient(rgb(80, 0, 178), rgb(38, 32, 25))');
-        cactus.src = "./imgs/cactus1.png";
-    } else if (dificuldade > 4000 && dificuldade <= 5000) {
-        aplicarTransicao('3s','5s', 'linear-gradient(rgb(0, 17, 255), rgb(255, 255, 255))');
-        cactus.src = "./imgs/cactus2.png";
-    }else if (dificuldade > 5000) {
-        aplicarTransicao('2s','4s', 'linear-gradient(rgb(0, 102, 255), rgb(255, 255, 255)');
-        cactus.src = "./imgs/cactus3.png";
-        dificuldade *=0; 
-    }
 
+    // Remove o event listener da tecla após o game over para desativar o pulo
+    document.removeEventListener('keydown', jump);
+    // adiciona imagem do dino chorando
+    // Pausa a música de fundo e finaliza o loop
+    backgroundMusic.pause();
+    // Exibe o modal ao finalizar o jogo 
+    modal.style.display = "block";
+    setTimeout(()=>{
+        dino.src = "./imgs/dinocry.gif";
+    },300);
+    setTimeout(()=>{
+        dino.src = "./imgs/dinocry.gif";
+    },1000);
+}
+
+// Loop principal do jogo
+const loop = setInterval(() => {
     if (!gameIsOver) {
+
+        // Posições das entidades e tile-sets
         const cactusPosition = cactus.offsetLeft;
         const pteroPosition = ptero.offsetLeft;
         const dinoPosition = window.getComputedStyle(dino).bottom.replace('px', '');
-        if (dinoPosition < 60 && cactusPosition <= 128 && cactusPosition > -3 || dinoPosition < 60 && pteroPosition <= 128 && pteroPosition > -3) {
-            crashSound.currentTime = 0; // Reinicia o som para evitar sobreposição
+        const groundPosition = ground.offsetLeft;
+        const vulcanPosition = vulcan.offsetLeft;
+        const backgroundPosition = background.offsetLeft;
+
+        // Verifica colisões em x, se passou de x e em y.
+        if (cactusPosition <= 200 && cactusPosition > 0 && dinoPosition < 256
+            || pteroPosition <= 200 && pteroPosition > 0 && dinoPosition < 256) {
+            // Reproduz o som de colisão
+            crashSound.currentTime = 0;
             crashSound.play();
+            // Animação de parada dos elementos e finaliza o loop
+            ground.style.animation = 'nome';
+            ground.style.left = `${groundPosition}px`;
+            background.style.animation = 'nome';
+            background.style.left = `${backgroundPosition}px`;
+            vulcan.style.animation = 'nome';
+            vulcan.style.left = `${vulcanPosition}px`;
             cactus.style.animation = 'nome';
             cactus.style.left = `${cactusPosition}px`;
             ptero.style.animation = 'nome';
             ptero.style.left = `${pteroPosition}px`;
             dino.style.animation = 'nome';
             dino.style.bottom = `${dinoPosition}px`;
-            setTimeout(()=>{
-                dino.src = "./imgs/dinocry.gif";
-            },200);
-            // Para pausar a música
-            backgroundMusic.pause();
             clearInterval(loop);
-
             // Chama a função de Game Over
             gameOver();
         } else {
-
-            // Para reproduzir a música
+            // Continua reproduzindo a música e atualiza a pontuação
             backgroundMusic.play();
             points++;
             dificuldade++;
             document.getElementById("pontuacaoFinal").innerHTML = points;
-            
         }
     }
 }, 10);
+
+// Event listener para começar a música de fundo ao carregar a página
 window.addEventListener("load", () => {
     backgroundMusic.play();
 });
+
+// Event listener para o pulo do dinossauro quando a tecla é pressionada
 document.addEventListener('keydown', jump);

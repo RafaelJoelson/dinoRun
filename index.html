@@ -26,14 +26,24 @@
             <div class="score">
                 <h1>PONTUAÇÃO</h1><h1 id = "pontuacaoFinal"></h1>
             </div>
-            <img class="clouds" src="./imgs/dinoclouds.png" alt="">
-            <div class="gameOverPopup" id="gameOverPopup" style="display: none;">
-                <h1>Game Over</h1>
-                <button onclick="reiniciarJogo()">Tentar de novo</button>
+            <div id="modal" class="modal">
+                <div class="modal-content">
+                    <h2>Game Over</h2>
+                    <p id="pontuacaoFinal"></p>
+                    <button id="reloadButton" onclick="location.reload();">TENTAR DE NOVO</button>
+                </div>
+            </div>
+            <div class="mountains-ini">         
             </div>
             <img class="cactus"src="./imgs/cactus1.png" alt="">
-            <img class="ptero" class="jump" src="./imgs/ptero.gif" alt="">
+            <img class="ptero" class="attack" src="./imgs/ptero.gif" alt="">
             <img class="dino" class="jump" src="./imgs/dinorun.gif" alt="">
+            <img class="clouds" src="./imgs/dinoclouds.png" alt="">
+            <img class="cloud" src="./imgs/dinocloud.png" alt="">
+            <img class="cloud2" src="./imgs/dinocloud.png" alt="">
+            <img class="vulcan" src="./imgs/vulcan.gif" alt="">
+            <div class="ground">         
+            </div>
         </div>
         <script src="./js/script.js" async defer></script>
     </body>
