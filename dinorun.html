@@ -4,6 +4,14 @@
         <source src="./audio/Vibe Mountain   Operatic 3 ♫ NO COPYRIGHT 8 bit Musi.mp3" type="audio/mp3">
         Seu navegador não suporta o elemento de áudio.
     </audio>
+    <audio id="jumpSound">
+        <source src="./audio/cartoon-jump-6462.mp3" type="audio/mp3">
+        Seu navegador não suporta o elemento de áudio.
+    </audio>
+    <audio id="crashSound">
+        <source src="./audio/funny-spring-jump-140378.mp3" type="audio/mp3">
+        Seu navegador não suporta o elemento de áudio.
+    </audio>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,13 +24,12 @@
     <body>
         <div id ="game-board" class="game-board">
             <div class="score">
-                <h1>PONTUAÇÃO</h1><h1>0</h1>
+                <h1>PONTUAÇÃO</h1><h1 id = "pontuacaoFinal"></h1>
             </div>
-            <div id="modal2" class="modal2">
-                <div class="modal2-content">
-                    <h2>Bem-vindo(a) ao Dino Run!</h2>
-                    <p>Desenvolvido por Rafael Joelson</p>
-                    <button id="reloadButton" onclick="iniciar_game();">INICIAR JOGO</button>
+            <div id="modal" class="modal">
+                <div class="modal-content">
+                    <h2>Game Over</h2>
+                    <button id="reloadButton" onclick="location.reload();">TENTAR DE NOVO</button>
                 </div>
             </div>
             <div class="mountains-ini">         
@@ -37,17 +44,6 @@
             <div class="ground">         
             </div>
         </div>
-        <script>
-            // Reproduz som do jogo
-            const backgroundMusic = document.getElementById("backgroundMusic");
-            // Continua reproduzindo a música e atualiza a pontuação
-            backgroundMusic.play();
-            // Exibe o modal ao iniciar o jogo 
-            modal2.style.display = "block";
-            function iniciar_game() {
-                window.location.href = "dinorun.html"; 
-            }
-
-        </script>
+        <script src="./js/script.js" async defer></script>
     </body>
 </html>

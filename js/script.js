@@ -44,6 +44,7 @@ const gameOver = () => {
 
     // Remove o event listener da tecla após o game over para desativar o pulo
     document.removeEventListener('keydown', jump);
+    document.removeEventListener('click', jump);
     // adiciona imagem do dino chorando
     // Pausa a música de fundo e finaliza o loop
     backgroundMusic.pause();
@@ -108,3 +109,4 @@ window.addEventListener("load", () => {
 
 // Event listener para o pulo do dinossauro quando a tecla é pressionada
 document.addEventListener('keydown', jump);
+document.addEventListener('click', jump);
